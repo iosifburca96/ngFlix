@@ -1,0 +1,36 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    background-color: #212121;
+    border-bottom: 1px solid #414141;
+    .logo {
+        a {
+            display: block;
+            img {
+                width: 120px;
+            }
+        }
+    }
+    .navigation {
+        ul {
+            display: block;
+            padding: 0;
+            margin: 0; 
+            list-style-type: none;
+            li {
+                display: inline;
+                margin-right: 15px;
+                :hover {
+                    color: red;
+                }
+                a {
+                    color: white;
+                    text-decoration: none;
+                
+                }
+            }
+        }
+    }
+}
