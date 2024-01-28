@@ -8,9 +8,20 @@ import { MoviesDto } from '../types/movie';
 })
 export class MoviesService {
 
+    private apiUrl = 'https://api.themoviedb.org/3';
+    private apiKey = '58494b0eb3cff0eb979e392f3d18aef2';
+
     constructor(private http: HttpClient) { }
 
     getPopularMovies() {
-        return this.http.get<MoviesDto>('https://api.themoviedb.org/3/movie/popular?api_key=58494b0eb3cff0eb979e392f3d18aef2');
+        return this.http.get<MoviesDto>(
+            `${this.apiUrl}/movie/popular?api_key=${this.apiKey}`
+        );
+    }
+
+    getUpcomingMovies() {
+        return this.http.get<MoviesDto>(
+            `${this.apiUrl}/movie/upcoming?api_key=${this.apiKey}`
+        );
     }
 }

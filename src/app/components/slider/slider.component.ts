@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MoviesService } from '../../services/movies.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { imagesBaseUrl } from '../../constants/image-sizes';
 
 @Component({
     selector: 'app-slider',
@@ -39,6 +40,8 @@ export class SliderComponent implements OnInit
 
     slideIndex = 0;
 
+    imagesBaseUrl = imagesBaseUrl;
+    
     ngOnInit() {
         this.changeSlide();
     }
@@ -48,6 +51,6 @@ export class SliderComponent implements OnInit
             if(this.slideIndex > 10) {
                 this.slideIndex = 0;
             }
-        }, 1000);
+        }, 5000);
     }
 }
