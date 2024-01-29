@@ -36,7 +36,7 @@ export class SliderComponent implements OnInit
     // }
 
     //movies observable
-    movies$ = this.moviesService.getPopularMovies();
+    movies$ = this.moviesService.getMoviesByType('popular');
 
     slideIndex = 0;
 
