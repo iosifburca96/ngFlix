@@ -15,9 +15,15 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 14px;
+    color: white;
     background-color: #141414;
 }
 .container {
     margin: .5rem;
     padding: .5rem;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { MoviesService } from '../../services/movies.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { imagesBaseUrl } from '../../constants/image-sizes';
+import { Movie } from '../../types/movie';
 
 @Component({
     selector: 'app-slider',
@@ -20,10 +20,13 @@ import { imagesBaseUrl } from '../../constants/image-sizes';
 })
 export class SliderComponent implements OnInit 
 {
+    @Input() slides : Movie[] = [];
+    @Input() isHeader = false;
+
+
     //movies: unknown;
 
-
-    constructor(private moviesService: MoviesService) { }
+    constructor() { }
 
     // ngOnInit(): void {
     //     this.getPopularMovies();
@@ -36,14 +39,16 @@ export class SliderComponent implements OnInit
     // }
 
     //movies observable
-    movies$ = this.moviesService.getMoviesByType('popular');
+    //movies$ = this.moviesService.getMoviesByType('popular');
 
     slideIndex = 0;
 
     imagesBaseUrl = imagesBaseUrl;
     
     ngOnInit() {
-        this.changeSlide();
+        if(!this.isHeader) {
+            this.changeSlide();
+        }
     }
     changeSlide() {
         setInterval(() => {
