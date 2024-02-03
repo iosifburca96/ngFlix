@@ -1,21 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+
 // modern normalize library to keep the styles uniform for different browsers
 @import '../node_modules/modern-normalize/modern-normalize.css';
 // primeflex library to use its responsive grid layout
 @import '../node_modules/primeflex/primeflex.css';
 // primeicons library for icons
 @import "primeicons/primeicons.css";
+// primeng styles
+@import "primeng/resources/themes/md-dark-indigo/theme.css";
+@import "primeng/resources/primeng.css";
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    color: white;
     background-color: #141414;
 }
 .container {

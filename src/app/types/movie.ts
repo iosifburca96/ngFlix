@@ -12,7 +12,11 @@ export type Movie = {
     title: string,
     video: boolean,
     vote_average: number,
-    vote_count: number
+    vote_count: number,
+    revenue?: number,
+    runtime?: string,
+    status?: string,
+    genres?: Genre[]
 }
 
 export type MoviesDto = {
@@ -20,4 +24,9 @@ export type MoviesDto = {
     results: Movie[],
     total_pages: number,
     total_results: number
+}
+
+export type Genre = {
+    id: string,
+    name: string
 }
