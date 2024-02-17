@@ -8,14 +8,17 @@ import { SliderComponent } from '../../components/slider/slider.component';
 import { TabViewModule } from 'primeng/tabview';
 import { IMAGE_SIZES } from '../../constants/image-sizes';
 import { Video } from '../../types/video';
+import { Image } from '../../types/image';
 import { VideoEmbedComponent } from "../../components/video-embed/video-embed.component";
-
+import { ImageModule } from 'primeng/image';
+import { CarouselModule } from 'primeng/carousel';
+import { Actor } from '../../types/credits';
 @Component({
     selector: 'app-show-detail',
     standalone: true,
     templateUrl: './show-detail.component.html',
     styleUrl: './show-detail.component.scss',
-    imports: [CommonModule, SliderComponent, TabViewModule, VideoEmbedComponent]
+    imports: [CommonModule, SliderComponent, TabViewModule, VideoEmbedComponent, ImageModule, CarouselModule]
 })
 export class ShowDetailComponent implements OnInit {
 
@@ -23,6 +26,9 @@ export class ShowDetailComponent implements OnInit {
 
     show$: Observable<Movie> | null = null;
     showVideos$: Observable<Video[]> | null = null;
+    showImages$: Observable<Image[]> | null = null;
+    showCast$: Observable<Actor[]> | null = null;
+
     imageSizes = IMAGE_SIZES;
 
     constructor(private router: ActivatedRoute, private moviesService: MoviesService) { }
@@ -37,5 +43,7 @@ export class ShowDetailComponent implements OnInit {
 
         this.show$ = this.moviesService.getMovieById(this.showId);
         this.showVideos$ = this.moviesService.getMovieVideos(this.showId);
+        this.showImages$ = this.moviesService.getMovieImages(this.showId);
+        this.showCast$ = this.moviesService.getMovieCast(this.showId);
     }
 }

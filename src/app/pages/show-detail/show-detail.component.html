@@ -62,10 +62,49 @@
 			</ng-container>
 		</p-tabPanel>
 
-		<p-tabPanel header="Photos"> </p-tabPanel>
+		<p-tabPanel header="Photos">
+			<ng-container *ngIf="showImages$ | async as showImages">
+				<div class="grid">
+					<div class="col-2" *ngFor="let showImage of showImages">
+						<p-image
+							[src]="imageSizes.large + showImage.file_path"
+							[alt]="show.title"
+							width="100%"
+							[preview]="true"
+						></p-image>
+					</div>
+				</div>
+			</ng-container>
+		</p-tabPanel>
 	</p-tabView>
+
+	<ng-container *ngIf="showCast$ | async as actors">
+		<p-carousel
+			[value]="actors"
+			[numVisible]="6"
+			[numScroll]="3"
+			[circular]="false"
+		>
+			<ng-template let-actor pTemplate="item">
+				<div class="actor">
+					<img
+						*ngIf="actor.profile_path; else defaultActorPhoto"
+						[src]="imageSizes.medium + actor.profile_path"
+						alt=""
+					/>
+					<div>{{ actor.name }}</div>
+					<div>({{ actor.character }})</div>
+				</div>
+			</ng-template>
+		</p-carousel>
+	</ng-container>
 </ng-container>
+
+<ng-template #defaultActorPhoto>
+	<img src="/assets/images/actor.jpg" alt="No Pitcure" />
+</ng-template>
+
 <p>The movie id is: {{ showId }}</p>
-<!-- <pre>
+<pre>
     {{ show$ | async | json }}
-</pre> -->
+</pre>
