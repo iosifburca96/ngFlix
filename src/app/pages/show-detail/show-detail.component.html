@@ -98,13 +98,18 @@
 			</ng-template>
 		</p-carousel>
 	</ng-container>
+
+    <ng-container *ngIf="similarShows$ | async as similarShows">
+        <app-banner title="Watch Similar" [shows]="similarShows" />
+      </ng-container>
 </ng-container>
 
 <ng-template #defaultActorPhoto>
 	<img src="/assets/images/actor.jpg" alt="No Pitcure" />
 </ng-template>
 
-<p>The movie id is: {{ showId }}</p>
+
+<!-- <p>The movie id is: {{ showId }}</p>
 <pre>
     {{ show$ | async | json }}
-</pre>
+</pre> -->
