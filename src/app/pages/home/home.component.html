@@ -1,5 +1,5 @@
 <ng-container *ngIf="popularMovies$ | async as popularMovies">
-	<app-slider [slides]="popularMovies"></app-slider>
+	<app-slider [slides]="popularMovies" [showType]="'movie'" (showDetailEvent)="onShowDetail($event)"></app-slider>
 </ng-container>
 <ng-container *ngIf="upcomingMovies$ | async as upcomingMovies">
 	<app-banner

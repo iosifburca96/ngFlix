@@ -1,6 +1,6 @@
 <div class="slider" *ngIf="slides">
 	<ng-container *ngFor="let movie of slides; let movieIndex = index">
-		<div class="slide" *ngIf="movieIndex === slideIndex" @slideFade>
+		<div class="slide" *ngIf="movieIndex === slideIndex" @slideFade (click)="onSlideClick(movie)">
 			<div class="slide-bg">
 				<img
 					[src]="imagesBaseUrl + 'w1280' + movie.backdrop_path"

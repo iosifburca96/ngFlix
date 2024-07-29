@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -13,15 +13,16 @@ import { Movie } from '../../types/movie';
     styleUrl: './slider.component.scss',
     animations: [
         trigger('slideFade', [
-            state('void', style({opacity: 0})),
+            state('void', style({ opacity: 0 })),
             transition('void <=> *', [animate('1.5s')])
         ])
     ]
 })
-export class SliderComponent implements OnInit 
-{
-    @Input() slides : Movie[] = [];
+export class SliderComponent implements OnInit {
+    @Input() slides: Movie[] = [];
     @Input() isHeader = false;
+    @Input() showType: 'movie' | 'tv' = 'movie';
+    @Output() showDetailEvent = new EventEmitter<{ id: number, type: 'movie' | 'tv' }>();
 
 
     //movies: unknown;
@@ -44,18 +45,22 @@ export class SliderComponent implements OnInit
     slideIndex = 0;
 
     imagesBaseUrl = imagesBaseUrl;
-    
+
     ngOnInit() {
-        if(!this.isHeader) {
+        if (!this.isHeader) {
             this.changeSlide();
         }
     }
     changeSlide() {
         setInterval(() => {
             this.slideIndex += 1;
-            if(this.slideIndex > 10) {
+            if (this.slideIndex > 10) {
                 this.slideIndex = 0;
             }
-        }, 5000);
+        }, 3000);
+    }
+
+    onSlideClick(slide: Movie) {
+        this.showDetailEvent.emit({ id: slide.id, type: this.showType });
     }
 }
