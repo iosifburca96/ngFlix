@@ -1,9 +1,9 @@
 export type CreditsDto = {
-    cast: Actor[];
+	cast: Actor[];
 };
 
 export type Actor = {
-    profile_path: string;
-    name: string;
-    character: string;
+	profile_path: string;
+	name: string;
+	character: string;
 };

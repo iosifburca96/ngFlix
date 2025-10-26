@@ -1,7 +1,7 @@
 export type ImagesDto = {
-    backdrops: Image[];
+	backdrops: Image[];
 };
 
 export type Image = {
-    file_path: string;
+	file_path: string;
 };

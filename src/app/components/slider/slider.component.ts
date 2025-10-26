@@ -1,66 +1,67 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { imagesBaseUrl } from '../../constants/image-sizes';
 import { Movie } from '../../types/movie';
 
 @Component({
-    selector: 'app-slider',
-    standalone: true,
-    imports: [HttpClientModule, CommonModule],
-    templateUrl: './slider.component.html',
-    styleUrl: './slider.component.scss',
-    animations: [
-        trigger('slideFade', [
-            state('void', style({ opacity: 0 })),
-            transition('void <=> *', [animate('1.5s')])
-        ])
-    ]
+	selector: 'app-slider',
+	standalone: true,
+	imports: [HttpClientModule, CommonModule],
+	templateUrl: './slider.component.html',
+	styleUrl: './slider.component.scss',
+	animations: [
+		trigger('slideFade', [
+			state('void', style({ opacity: 0 })),
+			transition('void <=> *', [animate('1.5s')])
+		])
+	]
 })
 export class SliderComponent implements OnInit {
-    @Input() slides: Movie[] = [];
-    @Input() isHeader = false;
-    @Input() showType: 'movie' | 'tv' = 'movie';
-    @Output() showDetailEvent = new EventEmitter<{ id: number, type: 'movie' | 'tv' }>();
+	@Input() slides: Movie[] = [];
+	@Input() isHeader = false;
+	@Input() showType: 'movie' | 'tv' = 'movie';
+	@Output() showDetailEvent = new EventEmitter<{ id: number; type: 'movie' | 'tv' }>();
 
+	//movies: unknown;
 
-    //movies: unknown;
+	constructor() {}
 
-    constructor() { }
+	// ngOnInit(): void {
+	//     this.getPopularMovies();
+	// }
+	// getPopularMovies() {
+	//     this.moviesService.getPopularMovies()
+	//         .subscribe(data => {
+	//             this.movies = data;
+	//         });
+	// }
 
-    // ngOnInit(): void {
-    //     this.getPopularMovies();
-    // }
-    // getPopularMovies() {
-    //     this.moviesService.getPopularMovies()
-    //         .subscribe(data => {
-    //             this.movies = data;
-    //         });
-    // }
+	//movies observable
+	//movies$ = this.moviesService.getMoviesByType('popular');
 
-    //movies observable
-    //movies$ = this.moviesService.getMoviesByType('popular');
+	slideIndex = 0;
 
-    slideIndex = 0;
+	imagesBaseUrl = imagesBaseUrl;
 
-    imagesBaseUrl = imagesBaseUrl;
+	ngOnInit() {
+		if (!this.isHeader) {
+			this.changeSlide();
+		}
+	}
 
-    ngOnInit() {
-        if (!this.isHeader) {
-            this.changeSlide();
-        }
-    }
-    changeSlide() {
-        setInterval(() => {
-            this.slideIndex += 1;
-            if (this.slideIndex > 10) {
-                this.slideIndex = 0;
-            }
-        }, 3000);
-    }
+	changeSlide() {
+		setInterval(() => {
+			this.slideIndex += 1;
 
-    onSlideClick(slide: Movie) {
-        this.showDetailEvent.emit({ id: slide.id, type: this.showType });
-    }
+			if (this.slideIndex > 10) {
+				this.slideIndex = 0;
+			}
+		}, 3000);
+	}
+
+	onSlideClick(slide: Movie) {
+		this.showDetailEvent.emit({ id: slide.id, type: this.showType });
+	}
 }
