@@ -56,7 +56,6 @@ export class MoviesService {
 		return this.http
 			.get<MoviesDto>(
 				`${this.apiUrl}/${uri}?query=${searchValue}&page=${page}&api_key=${this.apiKey}`
-			)
-			.pipe(map(data => data.results));
+			);
 	}
 }
